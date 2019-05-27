@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+	<bean class="com.cafe24.springcontainer.user.User1" />
+
+	<bean id="usr" name="user"
+		class="com.cafe24.springcontainer.user.User" />
+
+	<bean class="com.cafe24.springcontainer.user.User" />
+
+	<!-- 생성자를 설정해주지않으면 기본생성자를 찾아가는데, 생성자 arg를 설정해주지않은 상태에서 생성자를 오버로딩하여 파라미터를 
+		선언하면 오류가난다. -->
+	<bean id="usr2" class="com.cafe24.springcontainer.user.User">
+		<constructor-arg value="둘리" />
+		<property name="friends">
+			<list>
+				<value>마이콜</value>
+				<value>도우넛</value>
+				<value>또치</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- 생성자의 파라미터 순서에 맞게 인자값을 넣어줘야한다. -->
+	<!-- <constructor-arg index="1" value="1" /> 같이 인덱스를 설정해주면 생성자의 파라미터 순서를 설정할 수 있다. -->
+	<bean id="usr3" class="com.cafe24.springcontainer.user.User">
+		<constructor-arg index="1" value="마이콜" />
+		<constructor-arg index="0" value="1" />
+		<property name="friend">
+			<bean class="com.cafe24.springcontainer.user.Friend">
+				<property name="name" value="또치" />
+			</bean>
+		</property>
+	</bean>
+
+	<!-- ref = "bean으로 등록된 id" 값을 참조하여 객체를 참조할 수 있다. -->
+	<bean id="usr4" class="com.cafe24.springcontainer.user.User">
+		<property name="no" value="2" />
+		<property name="name" value="도우넛" />
+		<property name="friend" ref="friend" />
+	</bean>
+	
+	<bean id="friend" class="com.cafe24.springcontainer.user.Friend">
+		<property name="name" value="또치" />
+	</bean>
+
+</beans>
