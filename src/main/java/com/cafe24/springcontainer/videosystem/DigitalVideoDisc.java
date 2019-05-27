@@ -1,5 +1,5 @@
 package com.cafe24.springcontainer.videosystem;
 
-public class DigitalVideoDisc {
-
+public interface DigitalVideoDisc {
+	void play();
 }

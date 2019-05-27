@@ -26,7 +26,6 @@ public class CDPlayerXmlConfigTest {
 	@Rule
 	public final SystemOutRule systemOutRule = new SystemOutRule().enableLog();
 	
-	
 	@Autowired
 	private CompactDisc cd;
 	

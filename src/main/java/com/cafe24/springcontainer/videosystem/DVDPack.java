@@ -1,5 +1,14 @@
 package com.cafe24.springcontainer.videosystem;
 
-public class DVDPack {
+import java.util.List;
 
+public class DVDPack {
+	private String title;
+	private List<DigitalVideoDisc> dvds;
+
+	public DVDPack(String title, List<DigitalVideoDisc> dvds) {
+		this.title = title;
+		this.dvds = dvds;
+	}
+	
 }

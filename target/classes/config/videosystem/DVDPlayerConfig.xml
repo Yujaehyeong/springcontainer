@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- 01. 간단한 빈설정 -->
+	<bean class="com.cafe24.springcontainer.videosystem.Avengers" />
+
+	<!-- 02. 설정된 빈에 아이디 부여하기 -->
+	<bean id="ironMan"
+		class="com.cafe24.springcontainer.videosystem.IronMan" />
+
+	<!-- 03. 생성자를 통한 빈 주입 01 -->
+	<bean id="dvdPlayer2"
+		class="com.cafe24.springcontainer.videosystem.DVDPlayer">
+		<constructor-arg ref="ironMan" />
+	</bean>
+
+	<!-- 04. 생성자를 통한 빈 주입 02 : c-namespace의 argument name 사용 Spring 3.0부터 c-namespace, 
+		p-namespace 사용 가능 -->
+	<bean id="dvdPlayer3"
+		class="com.cafe24.springcontainer.videosystem.DVDPlayer"
+		c:dvd-ref="ironMan" />
+
+	<!-- 05. 생성자를 통한 빈 주입 03 : c-namespace의 argument index 사용 -->
+	<bean id="dvdPlayer4"
+		class="com.cafe24.springcontainer.videosystem.DVDPlayer"
+		c:_0-ref="ironMan" />
+
+	<!-- 06. 생성자를 통한 빈 주입 04 : c-namespace의 argument index 사용(argument가 하나인 
+		경우) -->
+	<bean id="dvdPlayer5"
+		class="com.cafe24.springcontainer.videosystem.DVDPlayer"
+		c:_-ref="ironMan" />
+
+	<!-- 07. 생성자를 통한 빈 주입 05 : literal 값을 생성자에 주입하는 경우 01 -->
+	<bean id="avengersInfinityWar"
+		class="com.cafe24.springcontainer.videosystem.BlankDisc">
+		<constructor-arg name="title"
+			value="Avengers Infinity War" />
+		<constructor-arg name="studio" value="MAVEL" />
+	</bean>
+
+	<!-- 08. 생성자를 통한 빈 주입 06 : literal 값을 생성자에 주입하는 경우 02 -->
+	<bean id="avengersEndgame"
+		class="com.cafe24.springcontainer.videosystem.BlankDisc"
+		c:title="Avengers Endgame" c:studio="MAVEL" />
+
+	<!-- 09. 생성자를 통한 빈 주입 07 : literal 값을 생성자에 주입하는 경우 03 -->
+	<bean id="avengersAgeOfUltron"
+		class="com.cafe24.springcontainer.videosystem.BlankDisc" c:_1="MAVEL"
+		c:_0="Avengers Age Of Ultron" />
+
+
+	<!-- 10. 생성자를 통한 빈 주입 08 : literal 값을 생성자에 주입하는 경우 03 -->
+	<bean id="captainAmerica"
+		class="com.cafe24.springcontainer.videosystem.BlankDisc" 
+		<constructor-arg name="title" value="Captain America" />
+		<constructor-arg name="studio" value="MAVEL" />
+		<constructor-arg><null/</constructor-arg>
+	</bean>
+	
+	<!-- 11. 생성자를 통한 빈 주입 09 : wiring Collection 02 -->
+	<bean id="captainAmerica"
+		class="com.cafe24.springcontainer.videosystem.BlankDisc" 
+		<constructor-arg name="title" value="Avengers" />
+		<constructor-arg name="studio" value="MAVEL" />
+		<constructor-arg>
+			<list>
+				<value></value>
+				<value></value>
+				<value></value>
+			</list>
+		</constructor-arg>
+	</bean>
+</beans>
